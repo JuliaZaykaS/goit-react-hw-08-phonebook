@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { filterContacts } from '../../redux/actions';
+import { filterContacts } from '../../redux/contacts/contact-actions';
 import Section from '../Section/Section';
 import ContactForm from '../ContactForm/ContactForm';
 import ContactList from '../ContactList/ContactList';
@@ -16,8 +16,8 @@ import {
   getFilter,
   getError,
   getIsLoading,
-} from '../../redux/selectors';
-import { fetchContacts, deleteContacts } from '../../redux/operations';
+} from '../../redux/contacts/contact-selectors';
+import { fetchContacts, deleteContacts } from '../../redux/contacts/contact-operations';
 
 export default function App() {
   const dispatch = useDispatch();
