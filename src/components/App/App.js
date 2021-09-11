@@ -6,6 +6,11 @@ import ContactForm from '../ContactForm/ContactForm';
 import ContactList from '../ContactList/ContactList';
 import Filter from '../Filter/Filter';
 import TechInfo from '../TechInfo/TechInfo';
+import { RegisterForm } from '../RegisterForm/RegisterForm';
+import LoginForm from '../LoginForm/LoginForm';
+import Navigation from '../Navigation/Navigation';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import PublicRoute from '../PublicRoute/PublicRoute';
 import {
   getFilteredContacts,
   getFilter,
@@ -32,18 +37,33 @@ export default function App() {
   };
 
   return (
-    <div>
-      <Section title={'Phonebook'}>
-        <ContactForm />
-        <h2>Contacts</h2>
+    <>
+      <PublicRoute exact path='/'>
+        <Navigation />
+      </PublicRoute>
+      <PublicRoute exact path='register' restricted>
+        <Section title={'Registration'}>
+          <RegisterForm />
+        </Section>
+      </PublicRoute>
+      <PublicRoute exact path='/login' restricted>
+        <Section title={'Login'}>
+          <LoginForm />
+        </Section>
+      </PublicRoute>
+      <PrivateRoute path="/contacts">
+        <Section title={'Phonebook'}>
+          <ContactForm />
+          <h2>Contacts</h2>
 
-        <Filter value={filteredContacts} onFindName={findName} />
-        {errorMessage && <TechInfo message={errorMessage} />}
-        {isLoading && <TechInfo message={'Loading...'} />}
-        {contactsList.length !== 0 && (
-          <ContactList contacts={contactsList} onBtnClick={onDeleteContact} />
-        )}
-      </Section>
-    </div>
+          <Filter value={filteredContacts} onFindName={findName} />
+          {errorMessage && <TechInfo message={errorMessage} />}
+          {isLoading && <TechInfo message={'Loading...'} />}
+          {contactsList.length !== 0 && (
+            <ContactList contacts={contactsList} onBtnClick={onDeleteContact} />
+          )}
+        </Section>
+      </PrivateRoute>
+    </>
   );
 }
