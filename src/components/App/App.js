@@ -6,7 +6,8 @@ import ContactForm from '../ContactForm/ContactForm';
 import ContactList from '../ContactList/ContactList';
 import Filter from '../Filter/Filter';
 import TechInfo from '../TechInfo/TechInfo';
-import { RegisterForm } from '../RegisterForm/RegisterForm';
+// import { RegisterForm } from '../RegisterForm/RegisterForm';
+import RegisterForm from '../RegisterForm/RegisterForm';
 import LoginForm from '../LoginForm/LoginForm';
 import Navigation from '../Navigation/Navigation';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
@@ -41,7 +42,7 @@ export default function App() {
       <PublicRoute exact path='/'>
         <Navigation />
       </PublicRoute>
-      <PublicRoute exact path='register' restricted>
+      <PublicRoute exact path='/register' restricted>
         <Section title={'Registration'}>
           <RegisterForm />
         </Section>
