@@ -56,7 +56,6 @@ export default function App() {
         <Section title={'Phonebook'}>
           <ContactForm />
           <h2>Contacts</h2>
-
           <Filter value={filteredContacts} onFindName={findName} />
           {errorMessage && <TechInfo message={errorMessage} />}
           {isLoading && <TechInfo message={'Loading...'} />}

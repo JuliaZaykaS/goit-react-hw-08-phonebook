@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // axios.defaults.baseURL = 'http://localhost:5555';
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 // const getTokenForAxios = (token) => {
 //   return axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 // }
@@ -17,14 +17,14 @@ const tokenForFetch = {
 };
 
 async function getContacts(token) {
-  tokenForFetch.set(token);
+  // tokenForFetch.set(token);
   // const response = await axios.get('/contacts');
   const response = await axios.get('/contacts');
   return response.data;
 }
 
 async function postContact(token, name, number) {
-   tokenForFetch.set(token);
+  //  tokenForFetch.set(token);
   const contact = await axios.post('/contacts', {
     name,
     number,
@@ -34,7 +34,7 @@ async function postContact(token, name, number) {
 }
 
 async function deleteContact(token, id) {
-   tokenForFetch.set(token);
+  //  tokenForFetch.set(token);
   await axios.delete(`/contacts/${id}`);
   return;
 }

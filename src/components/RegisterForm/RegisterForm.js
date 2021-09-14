@@ -2,16 +2,16 @@ import { useState } from 'react';
 import s from './RegisterForm.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { register } from '../../redux/auth/auth-operations';
-
+// console.log(register);
 // export const RegisterForm = () => {
-export default function RegisterForm () {
+  export default function RegisterForm () {
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 //   const [userName, setUserName] = useState('');
 //   const [userEmail, setUserEmail] = useState('');
 //   const [userPassword, setuserPassword] = useState('');
-  const dispatch = useDispatch();
 
   const onChangeInput = e => {
     const { name, value } = e.currentTarget;
@@ -33,7 +33,8 @@ export default function RegisterForm () {
   const onSubmitRegister = e => {
       e.preventDefault();
     //   dispatch(register({ userName, userEmail, userPassword }));
-      dispatch(register({ name, email, password }));
+    dispatch(register({ name, email, password }));
+    // console.log(name);
     setName('');
     setEmail('');
     setPassword('');

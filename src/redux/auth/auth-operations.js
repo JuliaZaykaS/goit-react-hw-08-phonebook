@@ -5,20 +5,25 @@ import { tokenForFetch } from '../../services/contacts-api';
 const register = createAsyncThunk(
     'auth/register',
     async credentials => {
+        console.log(credentials);
         try {
             const { data } = await axios.post('/users/signup', credentials);
+            tokenForFetch.set(data.token)
+            console.log(data);
             return data;
 
         } catch (error) {
 
         }
-    },
+    }
 );
+
 const logIn = createAsyncThunk(
     'auth/login',
     async credentials => {
         try {
             const { data } = await axios.post('/users/login', credentials);
+             tokenForFetch.set(data.token)
             return data;
 
         } catch (error) {
@@ -28,11 +33,11 @@ const logIn = createAsyncThunk(
 );
 const logOut = createAsyncThunk(
     'auth/logout',
-    async credentials => {
+    async () => {
         try {
-            const { data } = await axios.post('/users/logout', credentials);
+            await axios.post('/users/logout');
             tokenForFetch.unset();
-            return data;
+           
 
         } catch (error) {
 

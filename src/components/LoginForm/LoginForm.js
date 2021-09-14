@@ -5,17 +5,17 @@ import { logIn } from '../../redux/auth/auth-operations';
 
 
 export default function LoginForm() {
-  const [userEmail, setUserEmail] = useState('');
-  const [userPassword, setuserPassword] = useState('');
   const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const onChangeInput = (e) => {
     const { name, value } = e.currentTarget;
     switch (name) {
       case 'email':
-        return setUserEmail(value);
+        return setEmail(value);
       case 'password':
-        return setuserPassword(value);
+        return setPassword(value);
       default:
         return;
     }
@@ -23,9 +23,9 @@ export default function LoginForm() {
 
   const onSubmitLogin = e => {
     e.preventDefault();
-    setUserEmail('');
-    setuserPassword('');
-    dispatch(logIn({userEmail,userPassword}))
+    dispatch(logIn({email,password}))
+    setEmail('');
+    setPassword('');
   }
 
   return (
@@ -37,7 +37,7 @@ export default function LoginForm() {
             type="email"
             name='email'
             required
-            value={userEmail}
+            value={email}
             onChange={onChangeInput}
           />
         </label>
@@ -47,7 +47,7 @@ export default function LoginForm() {
             type="password"
            name='password'
             required
-            value={userPassword}
+            value={password}
             onChange={onChangeInput}
           />
         </label>
