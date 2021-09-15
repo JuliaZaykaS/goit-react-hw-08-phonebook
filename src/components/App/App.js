@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Switch } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { filterContacts } from '../../redux/contacts/contact-actions';
 import Section from '../Section/Section';
@@ -39,20 +40,22 @@ export default function App() {
 
   return (
     <>
-      <PublicRoute exact path='/'>
         <Navigation />
+      <Switch>
+      <PublicRoute exact path='/'>
+        <Section title={'Welcome to your wonderful phonebook'}></Section>
       </PublicRoute>
       <PublicRoute exact path='/register' restricted>
         <Section title={'Registration'}>
           <RegisterForm />
         </Section>
       </PublicRoute>
-      <PublicRoute exact path='/login' restricted>
+      <PublicRoute path='/login' restricted redirectTo="/contacts">
         <Section title={'Login'}>
           <LoginForm />
         </Section>
       </PublicRoute>
-      <PrivateRoute path="/contacts">
+      <PrivateRoute path="/contacts" redirectTo="/login">
         <Section title={'Phonebook'}>
           <ContactForm />
           <h2>Contacts</h2>
@@ -64,6 +67,7 @@ export default function App() {
           )}
         </Section>
       </PrivateRoute>
+      </Switch>
     </>
   );
 }
