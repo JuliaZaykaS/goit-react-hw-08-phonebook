@@ -37,8 +37,6 @@ const logOut = createAsyncThunk(
         try {
             await axios.post('/users/logout');
             tokenForFetch.unset();
-           
-
         } catch (error) {
 
         }

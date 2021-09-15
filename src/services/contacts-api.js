@@ -16,26 +16,33 @@ const tokenForFetch = {
   },
 };
 
-async function getContacts(token) {
-  // tokenForFetch.set(token);
+// async function getContacts(token) {
+async function getContacts() {
   // const response = await axios.get('/contacts');
-  const response = await axios.get('/contacts');
-  return response.data;
+  // const response = await axios.get('/contacts');
+  const contact = await axios.get('/contacts');
+  // tokenForFetch.set(response.data.token);
+  tokenForFetch.set(contact.data.token);
+  // return response.data;
+  return contact.data;
 }
 
-async function postContact(token, name, number) {
-  //  tokenForFetch.set(token);
+// async function postContact(token, name, number) {
+async function postContact( name, number) {
   const contact = await axios.post('/contacts', {
     name,
     number,
   });
   console.log(contact);
+  tokenForFetch.set(contact.data.token);
   return contact.data;
 }
 
-async function deleteContact(token, id) {
-  //  tokenForFetch.set(token);
-  await axios.delete(`/contacts/${id}`);
+// async function deleteContact(token, id) {
+async function deleteContact(id) {
+  // await axios.delete(`/contacts/${id}`);
+  const contact = await axios.delete(`/contacts/${id}`);
+  tokenForFetch.set(contact.data.token);
   return;
 }
 
