@@ -33,7 +33,7 @@ const fetchContacts = createAsyncThunk(
 const addContacts = createAsyncThunk(
   'contacts/addContacts',
   async ({ name, number }, thunkAPI) => {
-    console.log(name, number);
+    // console.log(name, number);
     const state = thunkAPI.getState();
     const persistToken = state.auth.token;
     tokenForFetch.set(persistToken);

@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 // import { filterContacts } from '../../redux/contacts/contact-actions';
 import Section from '../Section/Section';
 // import ContactForm from '../ContactForm/ContactForm';
 // import ContactList from '../ContactList/ContactList';
 // import Filter from '../Filter/Filter';
-// import TechInfo from '../TechInfo/TechInfo';
+import TechInfo from '../TechInfo/TechInfo';
 // import { RegisterForm } from '../RegisterForm/RegisterForm';
 import RegisterForm from '../RegisterForm/RegisterForm';
 import LoginForm from '../LoginForm/LoginForm';
@@ -23,7 +23,7 @@ import PublicRoute from '../PublicRoute/PublicRoute';
 //   fetchContacts,
 //   deleteContacts,
 // } from '../../redux/contacts/contact-operations';
-import { getIsCurrentUser } from '../../redux/auth/auth-selectors';
+import { getIsCurrentUser, getError, getIsLoading } from '../../redux/auth/auth-selectors';
 import { getCurrentUser } from '../../redux/auth/auth-operations';
 import ContactsPage from '../../views/ContactsPage';
 
@@ -34,6 +34,8 @@ export default function App() {
   // const errorMessage = useSelector(getError);
   // const isLoading = useSelector(getIsLoading);
   const currentUser = useSelector(getIsCurrentUser);
+  const error = useSelector(getError);
+  const isLoading = useSelector(getIsLoading);
 
   // const onDeleteContact = id => dispatch(deleteContacts(id));
 
@@ -59,19 +61,30 @@ export default function App() {
           <Navigation />
           <Switch>
             <PublicRoute exact path="/">
-              <Section title={'Welcome to your wonderful phonebook'}></Section>
-            </PublicRoute>
+                <Section title={'Welcome to your wonderful phonebook'}></Section>
+              </PublicRoute>
+              {/* {error ? <TechInfo message={error} /> : */}
+              {/* <> */}
             <PublicRoute exact path="/register" restricted>
               <Section title={'Registration'}>
-                <RegisterForm />
+                  <RegisterForm />
+                  {isLoading && <TechInfo message={'Loading'} />}
+                  {error && <TechInfo message={error} />}
+                  
               </Section>
             </PublicRoute>
             <PublicRoute path="/login" restricted redirectTo="/contacts">
-              <Section title={'Login'}>
-                <LoginForm />
+                <Section title={'Login'}>
+                  <LoginForm />
+                  {isLoading && <TechInfo message={'Loading'} />}
+                  {error && <TechInfo message={error} /> }
               </Section>
             </PublicRoute>
-            <PrivateRoute path="/contacts" redirectTo="/login">
+              <PrivateRoute path="/contacts" redirectTo="/login">
+                {/* {isLoading && <TechInfo message={'Loading'} />} */}
+                {isLoading
+                  ? <TechInfo message={'Loading'} />
+                  : <ContactsPage />}
               {/* <Section title={'Phonebook'}>
                 <ContactForm />
                 <h2>Contacts</h2>
@@ -85,8 +98,13 @@ export default function App() {
                   />
                 )}
               </Section> */}
-                <ContactsPage/>
-            </PrivateRoute>
+                {/* <ContactsPage/> */}
+                  </PrivateRoute>
+                  {/* </> */}
+          {/* } */}
+          {/* <Route>
+            <TechInfo message={ error}/>
+          </Route> */}
           </Switch>
         </>
       )}
