@@ -15,6 +15,7 @@ const authSlice = createSlice(
             user: { name: null, email: null, password: null },
             token: null,
             isLoggedIn: false,
+            isGetCurrentUser: false,
         },
         extraReducers: {
             [register.fulfilled](state, action) {
@@ -32,10 +33,17 @@ const authSlice = createSlice(
                 state.token = null;
                 state.isLoggedIn = false;
             },
+            [getCurrentUser.pending](state, action) {
+                state.isFetchingCurrentUser = true;
+            },
             [getCurrentUser.fulfilled](state, action) {
                 state.user = action.payload;
                 state.isLoggedIn = true;
-            }
+                state.isFetchingCurrentUser = false;
+            },
+            [getCurrentUser.rejected](state, action) {
+                state.isFetchingCurrentUser = false;
+            },
         },
     },
 );

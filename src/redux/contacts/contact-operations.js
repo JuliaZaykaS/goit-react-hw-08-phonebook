@@ -16,7 +16,7 @@ const fetchContacts = createAsyncThunk(
     try {
       const contacts = await getContacts();
       
-      console.log(contacts);
+      // console.log(contacts);
       return contacts;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

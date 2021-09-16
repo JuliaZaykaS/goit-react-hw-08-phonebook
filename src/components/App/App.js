@@ -19,7 +19,12 @@ import {
   getError,
   getIsLoading,
 } from '../../redux/contacts/contact-selectors';
-import { fetchContacts, deleteContacts } from '../../redux/contacts/contact-operations';
+import {
+  fetchContacts,
+  deleteContacts,
+} from '../../redux/contacts/contact-operations';
+import { getIsCurrentUser } from '../../redux/auth/auth-selectors';
+import { getCurrentUser } from '../../redux/auth/auth-operations';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -27,11 +32,13 @@ export default function App() {
   const filteredContacts = useSelector(getFilter);
   const errorMessage = useSelector(getError);
   const isLoading = useSelector(getIsLoading);
+  const currentUser = useSelector(getIsCurrentUser);
 
   const onDeleteContact = id => dispatch(deleteContacts(id));
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    // dispatch(fetchContacts());
+    dispatch(getCurrentUser());
   }, [dispatch]);
 
   const findName = e => {
@@ -40,34 +47,46 @@ export default function App() {
 
   return (
     <>
-        <Navigation />
-      <Switch>
-      <PublicRoute exact path='/'>
-        <Section title={'Welcome to your wonderful phonebook'}></Section>
-      </PublicRoute>
-      <PublicRoute exact path='/register' restricted>
-        <Section title={'Registration'}>
-          <RegisterForm />
-        </Section>
-      </PublicRoute>
-      <PublicRoute path='/login' restricted redirectTo="/contacts">
-        <Section title={'Login'}>
-          <LoginForm />
-        </Section>
-      </PublicRoute>
-      <PrivateRoute path="/contacts" redirectTo="/login">
-        <Section title={'Phonebook'}>
-          <ContactForm />
-          <h2>Contacts</h2>
-          <Filter value={filteredContacts} onFindName={findName} />
-          {errorMessage && <TechInfo message={errorMessage} />}
-          {isLoading && <TechInfo message={'Loading...'} />}
-          {contactsList.length !== 0 && (
-            <ContactList contacts={contactsList} onBtnClick={onDeleteContact} />
-          )}
-        </Section>
-      </PrivateRoute>
-      </Switch>
+      {currentUser ? (
+        <>
+        <Section title={'Phonebook'}></Section>
+          {/* <Navigation /> */}
+          </>
+      ) : (
+        <>
+          <Navigation />
+          <Switch>
+            <PublicRoute exact path="/">
+              <Section title={'Welcome to your wonderful phonebook'}></Section>
+            </PublicRoute>
+            <PublicRoute exact path="/register" restricted>
+              <Section title={'Registration'}>
+                <RegisterForm />
+              </Section>
+            </PublicRoute>
+            <PublicRoute path="/login" restricted redirectTo="/contacts">
+              <Section title={'Login'}>
+                <LoginForm />
+              </Section>
+            </PublicRoute>
+            <PrivateRoute path="/contacts" redirectTo="/login">
+              <Section title={'Phonebook'}>
+                <ContactForm />
+                <h2>Contacts</h2>
+                <Filter value={filteredContacts} onFindName={findName} />
+                {errorMessage && <TechInfo message={errorMessage} />}
+                {isLoading && <TechInfo message={'Loading...'} />}
+                {contactsList.length !== 0 && (
+                  <ContactList
+                    contacts={contactsList}
+                    onBtnClick={onDeleteContact}
+                  />
+                )}
+              </Section>
+            </PrivateRoute>
+          </Switch>
+        </>
+      )}
     </>
   );
 }
