@@ -16,13 +16,15 @@ const tokenForFetch = {
   },
 };
 
+// const tokenForContact = state.auth.token;
+
 // async function getContacts(token) {
 async function getContacts() {
   // const response = await axios.get('/contacts');
   // const response = await axios.get('/contacts');
   const contact = await axios.get('/contacts');
   // tokenForFetch.set(response.data.token);
-  tokenForFetch.set(contact.data.token);
+  // tokenForFetch.set(contact.data.token);
   // return response.data;
   return contact.data;
 }
@@ -33,8 +35,8 @@ async function postContact( name, number) {
     name,
     number,
   });
-  console.log(contact);
-  tokenForFetch.set(contact.data.token);
+  // console.log(contact);
+  // tokenForFetch.set(contact.data.token);
   return contact.data;
 }
 
