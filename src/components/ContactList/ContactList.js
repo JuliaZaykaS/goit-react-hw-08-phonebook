@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
+
 export default function ContactList({ contacts, onBtnClick }) {
   return (
     <ol className={s.contactList}>

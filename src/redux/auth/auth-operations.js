@@ -56,8 +56,13 @@ const getCurrentUser = createAsyncThunk(
         };
         tokenForFetch.set(persistToken);
         try {
-            const { data} =  await axios.get('/users/current');
+            const { data } = await axios.get('/users/current');
+            // await axios.get('/users/current');
+            // const contacts = await axios.get('/contacts');
             return data;
+            // console.log(data);
+            // console.log(contacts);
+            // return contacts.data;
         } catch (error) {
 
         }
