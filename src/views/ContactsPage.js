@@ -16,6 +16,7 @@ import {
   deleteContacts,
 } from '../redux/contacts/contact-operations';
 import { filterContacts } from '../redux/contacts/contact-actions';
+import s from './ContactsPage.module.css';
 
 export default function ContactsPage() {
   const contactsList = useSelector(getFilteredContacts);
@@ -37,7 +38,7 @@ export default function ContactsPage() {
     <>
       <Section title={'Phonebook'}>
         <ContactForm />
-        <h2>Contacts</h2>
+        <h2 className={s.title}>Contacts</h2>
         <Filter value={filteredContacts} onFindName={findName} />
         {errorMessage && <TechInfo message={errorMessage} />}
         {isLoading && <TechInfo message={'Loading...'} />}

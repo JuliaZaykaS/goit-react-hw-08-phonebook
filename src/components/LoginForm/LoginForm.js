@@ -2,6 +2,7 @@ import {useState} from 'react';
 import s from './LoginForm.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { logIn } from '../../redux/auth/auth-operations';
+import { Form, Button } from 'react-bootstrap';
 
 
 export default function LoginForm() {
@@ -29,8 +30,30 @@ export default function LoginForm() {
   }
 
   return (
-    <div>
-      <form onSubmit={onSubmitLogin}>
+
+    <>
+      <Form onSubmit={onSubmitLogin}>
+  <Form.Group className="mb-3" controlId="formBasicEmail">
+    <Form.Label>Email</Form.Label>
+    <Form.Control type="email" placeholder="Enter email" name='email'
+            required
+            value={email}
+            onChange={onChangeInput} />
+  </Form.Group>
+
+  <Form.Group className="mb-3" controlId="formBasicPassword">
+    <Form.Label >Password</Form.Label>
+    <Form.Control type="password" placeholder="Enter password" name='password'
+            required
+            value={password}
+            onChange={onChangeInput} />
+  </Form.Group>
+  
+  <Button variant="outline-primary" type="submit">
+    Log In
+  </Button>
+</Form>
+      {/* <form onSubmit={onSubmitLogin}>
         <label>
           Email
           <input
@@ -52,7 +75,7 @@ export default function LoginForm() {
           />
         </label>
         <button type='submit'>Log In</button>
-      </form>
-    </div>
+      </form> */}
+    </>
   );
 }

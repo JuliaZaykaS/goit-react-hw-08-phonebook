@@ -1,24 +1,22 @@
 import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
+import { Button, ListGroup } from 'react-bootstrap';
 
 export default function ContactList({ contacts, onBtnClick }) {
   return (
-    <ol className={s.contactList}>
+    <ListGroup variant="flush" className={s.contactList}>
+    {/* // <ListGroup className={s.contactList}> */}
       {contacts.map(({ id, name, number }) => (
-        <li className={s.contactItem} key={id}>
-          <span className={s.contactInfo}>
-            {name}: {number}
-          </span>
-          <button
-            className={s.button}
-            type="button"
-            onClick={() => onBtnClick(id)}
-          >
-            Delete
-          </button>
-        </li>
+        <ListGroup.Item key={id} variant="warning">
+          <span className={s.contactInfo} >
+          {name}: {number}
+        </span>
+          <Button variant="outline-danger" onClick={() => onBtnClick(id)}>Delete</Button>
+        </ListGroup.Item>
       ))}
-    </ol>
+  
+</ListGroup>
+     
   );
 }
 

@@ -26,6 +26,7 @@ import PublicRoute from '../PublicRoute/PublicRoute';
 import { getIsCurrentUser, getError, getIsLoading } from '../../redux/auth/auth-selectors';
 import { getCurrentUser } from '../../redux/auth/auth-operations';
 import ContactsPage from '../../views/ContactsPage';
+// import { Spinner } from 'react-bootstrap';
 
 export default function App() {
   const dispatch = useDispatch();

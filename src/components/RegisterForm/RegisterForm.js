@@ -2,6 +2,7 @@ import { useState } from 'react';
 import s from './RegisterForm.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { register } from '../../redux/auth/auth-operations';
+import { Form, Button } from 'react-bootstrap';
 // console.log(register);
 // export const RegisterForm = () => {
   export default function RegisterForm () {
@@ -44,7 +45,35 @@ import { register } from '../../redux/auth/auth-operations';
   };
   return (
     <div>
-      <form onSubmit={onSubmitRegister}>
+      <Form onSubmit={onSubmitRegister}>
+        <Form.Group className="mb-3" controlId="floatingTextarea">
+    <Form.Label>Name</Form.Label>
+    <Form.Control type="text" placeholder="Enter name" name="name"
+          required
+          value={name}
+          onChange={onChangeInput} />
+  </Form.Group>
+  <Form.Group className="mb-3" controlId="formBasicEmail">
+    <Form.Label>Email</Form.Label>
+    <Form.Control type="email" placeholder="Enter email" name='email'
+            required
+            value={email}
+            onChange={onChangeInput} />
+  </Form.Group>
+
+  <Form.Group className="mb-3" controlId="formBasicPassword">
+    <Form.Label>Password</Form.Label>
+    <Form.Control type="password" placeholder="Enter password" name='password'
+            required
+            value={password}
+            onChange={onChangeInput} />
+  </Form.Group>
+  
+  <Button variant="outline-primary" type="submit">
+    Registration
+  </Button>
+</Form>
+      {/* <form onSubmit={onSubmitRegister}>
         <label>
           Name
           <input
@@ -79,7 +108,7 @@ import { register } from '../../redux/auth/auth-operations';
           />
               </label>
               <button type='submit'>Registration</button>
-      </form>
+      </form> */}
     </div>
   );
 };

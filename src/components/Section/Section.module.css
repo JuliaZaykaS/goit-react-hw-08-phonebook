@@ -1,5 +1,9 @@
 .section {
   padding: 50px;
   /* background-color: bisque; */
-  /* text-align: center; */
+}
+
+.title {
+  color: #0d6efd;
+  text-align: center;
 }
