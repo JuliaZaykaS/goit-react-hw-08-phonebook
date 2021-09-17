@@ -3,7 +3,7 @@ import UserMenu from '../UserMenu/UserMenu';
 import { getIsLoggedIn, getUserName } from '../../redux/auth/auth-selectors';
 import { useSelector } from 'react-redux';
 import s from './Navigation.module.css';
-import { Navbar, Container, Nav, } from 'react-bootstrap';
+import { Navbar, Container, Nav } from 'react-bootstrap';
 
 export default function Navigation() {
   const isLoggedIn = useSelector(getIsLoggedIn);
@@ -11,30 +11,36 @@ export default function Navigation() {
 
   return (
     <>
-    <Navbar bg="primary" variant="dark" sticky='top' className={s.navigation}>
-    <Container>
-    <Navbar.Brand exact='true' to="/">Phonebook</Navbar.Brand>
-    <Nav className="me-auto">
+      <Navbar bg="primary" variant="dark" sticky="top" className={s.navigation}>
+        <Container className={s.navigationBar}>
+          <Navbar.Brand exact="true" to="/">
+            Phonebook
+          </Navbar.Brand>
+          <Nav className="me-auto">
             {/* <Nav.Link exact to="/">Home</Nav.Link> */}
-            <Nav.Link exact='true' href="/">Home</Nav.Link>
+            <Nav.Link exact="true" href="/">
+              Home
+            </Nav.Link>
             {isLoggedIn ? (
-              <>
+              <div className={s.greetingsBox}>
                 {/* <Nav.Link to="/contacts">Phonebook</Nav.Link> */}
-                <Nav.Link href="/contacts">Phonebook</Nav.Link>
-                <UserMenu userMail={userEmail} />
-              </>
+                <Nav.Link href="/contacts" className={s.phonebook}>Phonebook</Nav.Link>
+                <UserMenu userMail={userEmail} className={s.userMenu}/>
+              </div>
             ) : (
               <>
                 {/* <Nav.Link exact to="/login">LogIn</Nav.Link> */}
-                <Nav.Link exact='true' href="/login">LogIn</Nav.Link>
+                <Nav.Link exact="true" href="/login">
+                  LogIn
+                </Nav.Link>
                 {/* <Nav.Link to="/register">Registration</Nav.Link> */}
                 <Nav.Link href="/register">Registration</Nav.Link>
               </>
             )}
-    </Nav>
-    </Container>
+          </Nav>
+        </Container>
       </Navbar>
-      </>
+    </>
     // <nav>
     //   <NavLink exact to="/">
     //     Main

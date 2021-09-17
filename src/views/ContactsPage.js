@@ -9,6 +9,7 @@ import {
   getFilter,
   getError,
   getIsLoading,
+  getContacts,
 } from '../redux/contacts/contact-selectors';
 import { useEffect } from 'react';
 import {
@@ -23,6 +24,7 @@ export default function ContactsPage() {
   const filteredContacts = useSelector(getFilter);
   const errorMessage = useSelector(getError);
   const isLoading = useSelector(getIsLoading);
+  const contacts = useSelector(getContacts);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchContacts());
@@ -39,7 +41,10 @@ export default function ContactsPage() {
       <Section title={'Phonebook'}>
         <ContactForm />
         <h2 className={s.title}>Contacts</h2>
-        <Filter value={filteredContacts} onFindName={findName} />
+        {contacts.length > 1 && <Filter value={filteredContacts} onFindName={findName} />
+        }
+        {/* } */}
+        {/* <Filter value={filteredContacts} onFindName={findName} /> */}
         {errorMessage && <TechInfo message={errorMessage} />}
         {isLoading && <TechInfo message={'Loading...'} />}
         {contactsList.length !== 0 && (
