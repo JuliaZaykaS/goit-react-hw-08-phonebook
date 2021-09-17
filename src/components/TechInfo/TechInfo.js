@@ -10,6 +10,5 @@ export default function TechInfo({ message }) {
 }
 
 TechInfo.propTypes = {
-  // message: PropTypes.string.isRequired,
   message: PropTypes.string,
 };

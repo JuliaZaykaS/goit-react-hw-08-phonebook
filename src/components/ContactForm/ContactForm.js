@@ -42,61 +42,36 @@ export default function ContactForm() {
 
   return (
     <Form onSubmit={onSubmitContact} className={s.form}>
-  <Form.Group className="mb-3" controlId="floatingTextarea">
-    <Form.Label>Name</Form.Label>
-    <Form.Control type="text" placeholder="Enter name" name="name"
+      <Form.Group className="mb-3" controlId="floatingTextarea">
+        <Form.Label>Name</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter name"
+          name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
           required
           value={name}
-          onChange={onChangeInput} />
-  </Form.Group>
+          onChange={onChangeInput}
+        />
+      </Form.Group>
 
-  <Form.Group className="mb-3" controlId="floatingTextarea">
-    <Form.Label>Number</Form.Label>
-    <Form.Control placeholder="Enter number" type="tel"
+      <Form.Group className="mb-3" controlId="floatingTextarea">
+        <Form.Label>Number</Form.Label>
+        <Form.Control
+          placeholder="Enter number"
+          type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
           required
           value={number}
-          onChange={onChangeInput} />
-  </Form.Group>
-  
-  <Button variant="outline-primary" type="submit">
-    Add contact
-  </Button>
-</Form>
-    // <form className={s.form} onSubmit={onSubmitContact}>
-    //   <label className={s.label}>
-    //     Name
-    //     <input
-    //       className={s.input}
-    //       type="text"
-    //       name="name"
-    //       pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-    //       title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
-    //       required
-    //       value={name}
-    //       onChange={onChangeInput}
-    //     />
-    //   </label>
-    //   <label className={s.label}>
-    //     Number
-    //     <input
-    //       className={s.input}
-    //       type="tel"
-    //       name="number"
-    //       pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-    //       title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-    //       required
-    //       value={number}
-    //       onChange={onChangeInput}
-    //     />
-    //   </label>
-    //   <button className={s.button} type="submit">
-    //     Add contact
-    //   </button>
-    // </form>
+          onChange={onChangeInput}
+        />
+      </Form.Group>
+      <Button variant="outline-primary" type="submit">
+        Add contact
+      </Button>
+    </Form>
   );
 }

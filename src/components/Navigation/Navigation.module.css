@@ -1,27 +1,18 @@
-.navigation {
-}
-
 .navigationBar {
   display: flex;
   justify-content: space-between;
-  margin-right: 20px;
 }
 
-/* .navigationBar .me-auto {
-  display: flex;
-  justify-content: space-between;
-} */
-
 .greetingsBox {
-  /* margin-left: auto; */
   display: flex;
   justify-content: space-between;
 }
 
 .phonebook {
   margin-right: 100px;
-  /* margin-right: auto; */
 }
-/* .userMenu {
-  margin-left: auto;
-} */
+
+.entrance {
+  display: flex;
+  margin-left: 100px;
+}

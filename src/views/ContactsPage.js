@@ -29,22 +29,20 @@ export default function ContactsPage() {
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
-    
+
   const onDeleteContact = id => dispatch(deleteContacts(id));
   const findName = e => {
     dispatch(filterContacts(e.target.value));
   };
-
 
   return (
     <>
       <Section title={'Phonebook'}>
         <ContactForm />
         <h2 className={s.title}>Contacts</h2>
-        {contacts.length > 1 && <Filter value={filteredContacts} onFindName={findName} />
-        }
-        {/* } */}
-        {/* <Filter value={filteredContacts} onFindName={findName} /> */}
+        {contacts.length > 1 && (
+          <Filter value={filteredContacts} onFindName={findName} />
+        )}
         {errorMessage && <TechInfo message={errorMessage} />}
         {isLoading && <TechInfo message={'Loading...'} />}
         {contactsList.length !== 0 && (
