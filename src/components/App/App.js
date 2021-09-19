@@ -37,7 +37,7 @@ export default function App() {
             <PublicRoute exact path="/">
               <Section title={'Welcome to your wonderful phonebook'}></Section>
             </PublicRoute>
-            <PublicRoute exact path="/register" restricted>
+            <PublicRoute exact path="/register" restricted redirectTo="/contacts">
               <Section title={'Registration'}>
                 <RegisterForm />
                 {isLoading && <TechInfo message={'Loading'} />}
